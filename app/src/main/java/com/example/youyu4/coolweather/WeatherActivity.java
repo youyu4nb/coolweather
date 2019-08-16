@@ -96,7 +96,9 @@ public class WeatherActivity extends AppCompatActivity {
             Weather weather = Utility.handleWeatherResponse(weatherString);
             AQI aqi = Utility.handleAQIResponse(aqiString);
             mWeatherId = weather.basic.weatherId;
-            mParentCity = weather.basic.parentCity;
+            mParentCity = aqi.basic.parentCity;
+            Log.i("aaa", "onCreate: mWeatherId: " + mWeatherId);
+            Log.i("aaa", "onCreate: mParentCity: " + mParentCity);
             showWeatherInfo(weather);
             showAQIInfo(aqi);
         }else{
@@ -120,6 +122,8 @@ public class WeatherActivity extends AppCompatActivity {
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                Log.i("aaa", "onRefresh: mWeatherId: " + mWeatherId);
+                Log.i("aaa", "onRefresh: mParentCity: " + mParentCity);
                 requesetWeather(mWeatherId,mParentCity);
             }
         });
@@ -158,7 +162,7 @@ public class WeatherActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this).edit();
                             editor.putString("aqi",responseText);
                             editor.apply();
-                            mWeatherId = aqi.basic.weatherId;
+                            mParentCity = aqi.basic.parentCity;
                             showAQIInfo(aqi);
                         }else{
                             Toast.makeText(WeatherActivity.this,"获取AQI信息失败",Toast.LENGTH_SHORT).show();
