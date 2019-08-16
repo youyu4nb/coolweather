@@ -97,8 +97,6 @@ public class WeatherActivity extends AppCompatActivity {
             AQI aqi = Utility.handleAQIResponse(aqiString);
             mWeatherId = weather.basic.weatherId;
             mParentCity = aqi.basic.parentCity;
-            Log.i("aaa", "onCreate: mWeatherId: " + mWeatherId);
-            Log.i("aaa", "onCreate: mParentCity: " + mParentCity);
             showWeatherInfo(weather);
             showAQIInfo(aqi);
         }else{
@@ -122,8 +120,6 @@ public class WeatherActivity extends AppCompatActivity {
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Log.i("aaa", "onRefresh: mWeatherId: " + mWeatherId);
-                Log.i("aaa", "onRefresh: mParentCity: " + mParentCity);
                 requesetWeather(mWeatherId,mParentCity);
             }
         });

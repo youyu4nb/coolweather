@@ -101,8 +101,6 @@ public class ChooseAreaFragment extends Fragment {
                 }else if(currentLevel == LEVEL_COUNTY){
                     String weatherId = countyList.get(i).getWeatherId();
                     String parentCity = selectedCity.getCityName();
-                    Log.i("aaa", "onItemClick: weatherId: " + weatherId);
-                    Log.i("aaa", "onItemClick: parentCity: " + parentCity);
                     if(getActivity() instanceof MainActivity){
                         Intent intent = new Intent(getActivity(),WeatherActivity.class);
                         intent.putExtra("weather_id",weatherId);
