@@ -10,11 +10,12 @@ public class Weather {
 
     public Basic basic;
 
-    public AQI aqi;
+    public Update update;
 
     public Now now;
 
-    public Suggestion suggestion;
+    @SerializedName("lifestyle")
+    public List<Lifestyle> lifestyleList;
 
     @SerializedName("daily_forecast")
     public List<Forecast> forecastList;

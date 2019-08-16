@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.example.youyu4.coolweather.db.City;
 import com.example.youyu4.coolweather.db.County;
 import com.example.youyu4.coolweather.db.Province;
+import com.example.youyu4.coolweather.gson.AQI;
 import com.example.youyu4.coolweather.gson.Weather;
 import com.google.gson.Gson;
 
@@ -35,6 +36,7 @@ public class Utility {
         }
         return false;
     }
+
     /**
      * 解析和处理服务器返回的市级数据
      */
@@ -57,6 +59,7 @@ public class Utility {
         }
         return false;
     }
+
     /**
      * 解析和处理服务器返回的县级数据
      */
@@ -86,9 +89,24 @@ public class Utility {
     public static Weather handleWeatherResponse(String response){
         try{
             JSONObject jsonObject = new JSONObject(response);
-            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather6");
             String weatherContent = jsonArray.getJSONObject(0).toString();
             return new Gson().fromJson(weatherContent,Weather.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 将返回的JSON数据解析成AQI实体类
+     */
+    public static AQI handleAQIResponse(String response){
+        try{
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather6");
+            String weatherContent = jsonArray.getJSONObject(0).toString();
+            return new Gson().fromJson(weatherContent, AQI.class);
         }catch (Exception e){
             e.printStackTrace();
         }
